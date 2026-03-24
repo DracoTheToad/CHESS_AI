@@ -23,7 +23,7 @@ body {
     padding: 3rem;
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 255, 0.4), inset 10px 10px 30px rgba(0, 0, 255, 0.1), -10px -10px 30px rgba(255, 255, 255, 0.5);
-    transform: rotateX(10deg) rotateY(-10deg);
+    /* transform: rotateX(10deg) rotateY(-10deg); */
     transition: transform 0.5s ease, box-shadow 0.5s ease;
 }
 

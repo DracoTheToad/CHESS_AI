@@ -6,19 +6,56 @@ document.addEventListener('DOMContentLoaded', () => {
     let moveCount = 1; // Initialize the move count
     let userColor = 'w'; // Initialize the user's color as white
 
-    // Function to make a random move for the computer
-    const makeRandomMove = () => {
-        const possibleMoves = game.moves();
-
+    // Function to make a move for the computer via API
+    const makeRandomMove = async () => {
         if (game.game_over()) {
             alert("Checkmate!");
-        } else {
-            const randomIdx = Math.floor(Math.random() * possibleMoves.length);
-            const move = possibleMoves[randomIdx];
-            game.move(move);
+            return;
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:5003/move', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    fen: game.fen()
+                })
+            });
+
+            const data = await response.json();
+
+            // ❗ kiểm tra dữ liệu trả về
+            if (!data || !data.move) {
+                console.error("Invalid API response:", data);
+                return;
+            }
+
+            console.log("API move:", data.move);
+
+            // ✅ convert UCI → object cho chess.js
+            const moveObj = {
+                from: data.move.substring(0, 2),
+                to: data.move.substring(2, 4),
+                promotion: 'q'
+            };
+
+            const move = game.move(moveObj);
+
+            // ❗ tránh lỗi null.san
+            if (move === null) {
+                console.error("Invalid move from API:", data.move);
+                console.log("Current FEN:", game.fen());
+                return;
+            }
+
             board.position(game.fen());
-            recordMove(move, moveCount); // Record and display the move with move count
-            moveCount++; // Increament the move count
+            recordMove(move.san, moveCount);
+            moveCount++;
+
+        } catch (error) {
+            console.error("API error:", error);
         }
     };
 
