@@ -1,0 +1,20 @@
+# Python compiled files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Environment variables (configs)
+.env
+!.env.example
+
+# IDEs
+.vscode/
+.idea/
+
+
+# Project specific
+your-background-image.jpeg

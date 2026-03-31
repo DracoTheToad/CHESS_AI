@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vendor/chessboard.min.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>GrandMaster AI | Professional Chess Engine</title>
+</head>
+
+<body>
+    <div class="app-background"></div>
+    <div class="glass-container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-chess-knight"></i>
+                <div class="brand">
+                    <h1>GrandMaster AI</h1>
+                    <span class="tagline">Neural Strategy Engine v2.0</span>
+                </div>
+            </div>
+            <div class="status-badge" id="status-badge">
+                <span class="status-dot"></span>
+                <span id="status-text">Your Turn (White)</span>
+            </div>
+        </header>
+
+        <main>
+            <section class="board-container">
+                <div class="board" id="board"></div>
+            </section>
+
+            <aside class="side-panel">
+                <div class="card control-card">
+                    <h3><i class="fas fa-sliders-h"></i> Commands</h3>
+                    <div class="button-grid">
+                        <button class="play-again primary-btn" title="Restart Game">
+                            <i class="fas fa-redo"></i> Reset Match
+                        </button>
+                        <button class="flip-board secondary-btn" title="Switch Sides">
+                            <i class="fas fa-exchange-alt"></i> Flip View
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card history-card">
+                    <h3><i class="fas fa-history"></i> Move History</h3>
+                    <div id="move-history" class="move-history">
+                        <div class="history-placeholder">Waiting for the first move...</div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 GrandMaster AI System • Engine powered by <span class="accent-text">Minimax with Alpha-Beta</span></p>
+        </footer>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/vendor/chessboard.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>
